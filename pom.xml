@@ -24,7 +24,11 @@
                 <artifactId>axis2</artifactId>
                 <version>${axis2.wso2.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.synapse</groupId>
+                <artifactId>synapse-core</artifactId>
+                <version>2.1.7-wso2v7</version>
+            </dependency>
         </dependencies>
 
         <build>
@@ -76,16 +80,12 @@
             </repository>
         </repositories>
 
-
         <properties>
-
             <!-- Axiom -->
             <axiom.api.wso2.version>1.2.11-wso2v11</axiom.api.wso2.version>
             <axiom.wso2.version>1.2.11.wso2v11</axiom.wso2.version>
 
             <!-- Axis2 -->
             <axis2.wso2.version>1.6.1-wso2v23</axis2.wso2.version>
-
         </properties>
-
     </project>

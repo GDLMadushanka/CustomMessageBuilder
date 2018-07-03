@@ -18,10 +18,12 @@
 
 package com.wso2.custom;
 
+import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMOutputFormat;
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.context.MessageContext;
 import org.apache.axis2.transport.MessageFormatter;
+import org.apache.synapse.commons.json.JsonUtil;
 
 import java.io.OutputStream;
 import java.net.URL;
@@ -34,7 +36,14 @@ public class StringToJsonCustomMessageFormatter implements MessageFormatter {
 
     @Override
     public void writeTo(MessageContext messageContext, OMOutputFormat omOutputFormat, OutputStream outputStream, boolean b) throws AxisFault {
-        System.out.println("Hello from lahiru");
+        if (messageContext == null || outputStream == null) {
+            return;
+        }
+        OMElement element = messageContext.getEnvelope().getBody().getFirstElement();
+        String jsonString = element.getText();
+        JsonUtil.getNewJsonPayload(messageContext, jsonString, true, true);
+        JsonUtil.setContentType(messageContext);
+        JsonUtil.writeAsJson(messageContext, outputStream);
     }
 
     @Override
